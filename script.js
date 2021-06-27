@@ -79,7 +79,7 @@ class Alert {
             popup.dispatchEvent(confirmEvent);
         });
         bottomButtons.appendChild(confirmButton);
-        if (options.hasOwnProperty('showDenyButton')) {
+        if (options.hasOwnProperty('showDenyButton') && options.showDenyButton) {
             const deny = document.createElement('button');
             deny.type = 'button';
             deny.className = "__alert_button __alert_button_danger";
@@ -192,13 +192,14 @@ class Alert {
         document.body.appendChild(popup);
         alert.togglePopup(popup);
         return new Promise((res, rej) => {
-            document.body.addEventListener('click', () => {
+            const docCb = () => {
                 alert.state.dismissMode = "backdrop";
                 alert.state.isConfirmed = false;
                 alert.state.isDenied = true;
                 const backdrop = new Event('backdrop_deny');
                 popup.dispatchEvent(backdrop);
-            });
+            }
+            document.body.addEventListener('click', docCb);
             popup.addEventListener('alert_confirm', () => {
                 alert.dismissPopup(popup);
                 res(alert.state);
@@ -210,6 +211,9 @@ class Alert {
             popup.addEventListener('backdrop_deny', () => {
                 alert.dismissPopup(popup);
                 res(alert.state);
+            });
+            popup.addEventListener('popup_close', () => {
+                document.body.removeEventListener('click', docCb);
             });
             if (!popup) rej(new Error('popup undefined'));
         });
