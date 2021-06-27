@@ -29,6 +29,7 @@
 | -------- | ------------- | ------ | -------- | -----
 |```title``` | ```''``` | sets popup's title | yes | ```string```
 |```text```| ```null```| sets popup's text | no | ```string```
+| ```confirmButtonText``` | ```'Ok'``` | sets the confirm button text | no | ```string```
 | ```showDenyButton```| ```false```| shows the deny button | no | ```boolean```
 | ```denyButtonText```| ```Cancella```| sets text on the deny button | no | ```string```
 | ```icon``` | ```null``` | sets the popup's icon | no | ```success \| warning \| error```
