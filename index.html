@@ -8,12 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" 
+        integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
     <link rel="stylesheet" href="style.css">
-    <style>
-        * {
-            font-family: 'Open Sans', sans-serif;
-        }
-    </style>
     <script src="script.js"></script>
 </head>
 <body>
@@ -24,7 +26,8 @@
                 title: 'Ciao',
                 text: 'I am a text',
                 showDenyButton: true,
-                denyButtonText: 'No'
+                denyButtonText: 'No',
+                icon: 'error',
             }, e)
             .then(r => console.log(r))
         })

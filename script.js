@@ -28,6 +28,26 @@ class Alert {
     generatePopup(options) {
         const popup = document.createElement('div');
         popup.className = "__alert_popup __alert_popup_hidden";
+        if (options.hasOwnProperty('icon')) {
+            const icon = document.createElement('i');
+            switch (options.icon) {
+                case 'success':
+                    icon.className = "lar la-check-circle __alert_icon_success";
+                    break;
+                case 'error':
+                    icon.className = "las la-exclamation-circle __alert_icon_error";
+                    break;
+                case 'warning':
+                    icon.className = "las la-exclamation-triangle __alert_icon_warning";
+                    break;
+                default:
+                    throw new Error('icon type is not valid');
+            }
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = "__alert_icon_wrapper";
+            iconWrapper.appendChild(icon);
+            popup.appendChild(iconWrapper);
+        }
         const popupTitle = document.createElement('h2');
         popupTitle.className = "__alert_title";
         popupTitle.innerText = options.title;
