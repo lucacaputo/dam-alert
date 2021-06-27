@@ -25,6 +25,10 @@ class Alert {
         Alert.hider = Alert.buildHider();
     }
 
+    setScrollLock(locked) {
+        document.body.style.overflow = locked ? 'hidden' : 'unset';
+    }
+
     generatePopup(options) {
         const popup = document.createElement('div');
         popup.className = "__alert_popup __alert_popup_hidden";
@@ -91,6 +95,20 @@ class Alert {
         }
         popup.addEventListener('click', e => e.stopPropagation());
         popup.appendChild(bottomButtons);
+        if (options.hasOwnProperty('onOpen')) {
+            if (typeof options.onOpen !== 'function') {
+                throw new Error('open callback must be a function');
+            } else {
+                popup.addEventListener('popup_open', options.onOpen);
+            }
+        }
+        if (options.hasOwnProperty('onClose')) {
+            if (typeof options.onClose !== 'function') {
+                throw new Error('close callback must be a function');
+            } else {
+                popup.addEventListener('popup_close', options.onClose);
+            }
+        }
         return popup;
     }
     
@@ -147,9 +165,24 @@ class Alert {
     }
 
     dismissPopup(popup) {
-        Alert.closeHider()
+        const closePopup = new Event('popup_close');
+        return Alert.closeHider()
         .then(() => this.closePopup(popup))
-        .then(p => this.destroyPopup(p));
+        .then(p => {
+            p.dispatchEvent(closePopup);
+            this.destroyPopup(p);
+            this.setScrollLock(false);
+        });
+    }
+
+    togglePopup(popup) {
+        const popupOpened = new Event('popup_open');
+        return Alert.openHider()
+        .then(() => this.openPopup(popup))
+        .then(p => {
+            this.setScrollLock(true);
+            p.dispatchEvent(popupOpened);
+        })
     }
 
     static firePopup(options, evt=null) {
@@ -157,8 +190,7 @@ class Alert {
         const alert = new Alert();
         const popup = alert.generatePopup(options);
         document.body.appendChild(popup);
-        Alert.openHider()
-        .then(() => alert.openPopup(popup));
+        alert.togglePopup(popup);
         return new Promise((res, rej) => {
             document.body.addEventListener('click', () => {
                 alert.state.dismissMode = "backdrop";

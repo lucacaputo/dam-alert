@@ -27,7 +27,9 @@
                 text: 'I am a text',
                 showDenyButton: true,
                 denyButtonText: 'No',
-                icon: 'error',
+                icon: 'success',
+                onOpen: () => console.log('opened'),
+                onClose: () => console.log('closed'),
             }, e)
             .then(r => console.log(r))
         })
@@ -37,5 +39,6 @@
             })
         })
     </script>
+    <div style="height: 2500px;"></div>
 </body>
 </html>
