@@ -1,15 +1,12 @@
-body {
-    font-family: 'Open Sans', sans-serif;
-}
-.__alert_popup *:not(i) {
-    box-sizing: border-box;
-    font-family: inherit;
-}
 :root {
     --alert-primary: #007bff;
     --alert-danger: #dc3545;
     --alert-warning: #ffc107;
     --alert-success: #28a745;
+}
+.__alert_popup *:not(i) {
+    box-sizing: border-box;
+    font-family: inherit;
 }
 .__alert_hider {
     position: fixed;
