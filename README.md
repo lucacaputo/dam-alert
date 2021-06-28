@@ -22,6 +22,14 @@
       * the event parameter is optional, but if it is fired by user interaction either pass it to the function or call ```event.stopPropagation()``` before firing the popup
       * if the event is fired by the page (eg. ```window``` load event or ```document``` ready event) then you don't need to pass the event or stopping its propagation
       * requires lineawesome 1.3 if icons are used
+      * the object returned after the alert dismiss looks like this:
+        ```javascript
+            {
+                isConfirmed: boolean,
+                isDenied: boolean,
+                dismissMode: 'confirmButton' | 'denyButton' | 'backdrop'
+            }
+        ```
 
 ## Options
 
