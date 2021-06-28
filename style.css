@@ -78,6 +78,9 @@ body {
 .__alert_icon_warning {
     color: var(--alert-warning);
 }
+.__alert_icon_primary {
+    color: var(--alert-primary);
+}
 .__alert_title {
     text-align: center;
     margin-block-end: 0;

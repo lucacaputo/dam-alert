@@ -44,6 +44,9 @@ class Alert {
                 case 'warning':
                     icon.className = "las la-exclamation-triangle __alert_icon_warning";
                     break;
+                case 'info':
+                    icon.className = "las la-info-circle __alert_icon_primary";
+                    break;
                 default:
                     throw new Error('icon type is not valid');
             }

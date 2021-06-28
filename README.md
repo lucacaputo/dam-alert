@@ -32,6 +32,6 @@
 | ```confirmButtonText``` | ```'Ok'``` | sets the confirm button text | no | ```string```
 | ```showDenyButton```| ```false```| shows the deny button | no | ```boolean```
 | ```denyButtonText```| ```'Cancella'```| sets text on the deny button | no | ```string```
-| ```icon``` | ```null``` | sets the popup's icon | no | ```success \| warning \| error```
+| ```icon``` | ```null``` | sets the popup's icon | no | ```'success' \| 'warning' \| 'error' \| 'info'```
 | ```onOpen``` | ```null``` | function that fires after popup opening animation | no | ```() => void```
 | ```onClose``` | ```null``` | function that fires after popup closing animation | no | ```() => void```
