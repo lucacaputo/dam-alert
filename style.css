@@ -46,7 +46,7 @@ body {
     transform: translate(-50%, -20%);
     opacity: 0;
     z-index: 4;
-    transition: transform .3s ease, opacity .3s linear;
+    transition: transform .3s cubic-bezier(.22,.68,0,1.71), opacity .3s linear;
     box-shadow: 0 0 15px #141414;
 }
 .__alert_popup_hidden {
