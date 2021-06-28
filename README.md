@@ -1,10 +1,10 @@
-# SweetAlert Lite
+# DAM Alert
 
 ## Usage
 1. import the script and css
     ```html
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js">
+    <link rel="stylesheet" href="dam-alert.css">
+    <script src="dam-alert.js">
     ```
 2. trigger popups using
     ```javascript
