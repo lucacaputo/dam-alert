@@ -32,6 +32,9 @@ class Alert {
     generatePopup(options) {
         const popup = document.createElement('div');
         popup.className = "__alert_popup __alert_popup_hidden";
+        if (options.hasOwnProperty('customClass') && options.customClass !== '') {
+            popup.classList.add(options.customClass);
+        }
         if (options.hasOwnProperty('icon')) {
             const icon = document.createElement('i');
             switch (options.icon) {

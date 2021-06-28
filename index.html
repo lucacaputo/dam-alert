@@ -17,9 +17,17 @@
     />
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <style>
+        .bg-yellow {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
     <button id="click">click</button>
+    <button id="click1">click1</button>
+    <button id="click2">click2</button>
+    <button id="click3">click3</button>
     <script>
         document.querySelector("#click").addEventListener('click', e => {
             Alert.firePopup({
@@ -33,6 +41,43 @@
             }, e)
             .then(r => console.log(r))
         })
+        document.querySelector("#click1").addEventListener('click', e => {
+            Alert.firePopup({
+                title: 'Ciao',
+                text: 'I am a text',
+                showDenyButton: true,
+                denyButtonText: 'No',
+                icon: 'success',
+                onOpen: () => console.log('opened'),
+                onClose: () => console.log('closed'),
+            }, e)
+            .then(r => console.log(r))
+        });
+        document.querySelector("#click2").addEventListener('click', e => {
+            Alert.firePopup({
+                title: 'Ciao',
+                text: 'I am a text',
+                showDenyButton: true,
+                denyButtonText: 'No',
+                icon: 'warning',
+                onOpen: () => console.log('opened'),
+                onClose: () => console.log('closed'),
+                customClass: 'bg-yellow',
+            }, e)
+            .then(r => console.log(r))
+        });
+        document.querySelector("#click3").addEventListener('click', e => {
+            Alert.firePopup({
+                title: 'Ciao',
+                text: 'I am a text',
+                showDenyButton: true,
+                denyButtonText: 'No',
+                icon: 'error',
+                onOpen: () => console.log('opened'),
+                onClose: () => console.log('closed'),
+            }, e)
+            .then(r => console.log(r))
+        });
         window.addEventListener('load', () => {
             Alert.firePopup({
                 title: 'Loaded!'

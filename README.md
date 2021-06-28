@@ -33,5 +33,6 @@
 | ```showDenyButton```| ```false```| shows the deny button | no | ```boolean```
 | ```denyButtonText```| ```'Cancella'```| sets text on the deny button | no | ```string```
 | ```icon``` | ```null``` | sets the popup's icon | no | ```'success' \| 'warning' \| 'error' \| 'info'```
+| ```customClass``` | ```null``` | adds a custom class to the popup outer wrapper | no | ```string```
 | ```onOpen``` | ```null``` | function that fires after popup opening animation | no | ```() => void```
 | ```onClose``` | ```null``` | function that fires after popup closing animation | no | ```() => void```
