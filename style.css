@@ -14,7 +14,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 1000;
     opacity: 0;
     background-color: rgba(0,0,0,.6);
     transition: opacity .15s linear;
@@ -42,7 +42,7 @@
     align-items: stretch;
     transform: translate(-50%, -20%);
     opacity: 0;
-    z-index: 4;
+    z-index: 1001;
     transition: transform .3s cubic-bezier(.22,.68,0,1.71), opacity .3s linear;
     box-shadow: 0 0 15px #141414;
 }
