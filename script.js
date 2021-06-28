@@ -133,12 +133,9 @@ class Alert {
             popup.classList.remove("__alert_popup_fired");
         })
         .then(p => {
-            return new Promise((res, rej) => {
-                if (!p) rej(new Error('popup undefined'));
-                p.classList.add("__alert_popup_hidden");
-                popup.classList.remove("__alert_popup_visible");
-                res(p);
-            })
+            p.classList.add("__alert_popup_hidden");
+            popup.classList.remove("__alert_popup_visible");
+            return p;
         })
     }
 
@@ -157,12 +154,9 @@ class Alert {
             Alert.hider.classList.remove("__alert_hider_fired");
         })
         .then(h => {
-            return new Promise((res, rej) => {
-                if (!h) rej(new Error('hider undefined'));
-                h.classList.add("__alert_hider_hidden");
-                h.classList.remove("__alert_hider_visible");
-                res(h);
-            })
+            h.classList.add("__alert_hider_hidden");
+            h.classList.remove("__alert_hider_visible");
+            return h;
         })
     }
 
@@ -183,10 +177,10 @@ class Alert {
 
     togglePopup(popup) {
         const popupOpened = new Event('popup_open');
+        this.setScrollLock(true);
         return Alert.openHider()
         .then(() => this.openPopup(popup))
         .then(p => {
-            this.setScrollLock(true);
             p.dispatchEvent(popupOpened);
         })
     }
@@ -197,30 +191,26 @@ class Alert {
         const popup = alert.generatePopup(options);
         document.body.appendChild(popup);
         alert.togglePopup(popup);
+        const docCb = () => {
+            alert.state.dismissMode = "backdrop";
+            alert.state.isConfirmed = false;
+            alert.state.isDenied = true;
+            const backdrop = new Event('backdrop_deny');
+            popup.dispatchEvent(backdrop);
+        }
+        document.body.addEventListener('click', docCb);
+        popup.addEventListener('popup_close', () => {
+            document.body.removeEventListener('click', docCb);
+        });
+        function dismissAndResolve(alert, popup, resolve) {
+            alert.dismissPopup(popup);
+            resolve(alert.state);
+        }
         return new Promise((res, rej) => {
-            const docCb = () => {
-                alert.state.dismissMode = "backdrop";
-                alert.state.isConfirmed = false;
-                alert.state.isDenied = true;
-                const backdrop = new Event('backdrop_deny');
-                popup.dispatchEvent(backdrop);
-            }
-            document.body.addEventListener('click', docCb);
-            popup.addEventListener('alert_confirm', () => {
-                alert.dismissPopup(popup);
-                res(alert.state);
-            });
-            popup.addEventListener('alert_deny', () => {
-                alert.dismissPopup(popup);
-                res(alert.state);
-            });
-            popup.addEventListener('backdrop_deny', () => {
-                alert.dismissPopup(popup);
-                res(alert.state);
-            });
-            popup.addEventListener('popup_close', () => {
-                document.body.removeEventListener('click', docCb);
-            });
+            const dism = dismissAndResolve.bind(this, alert, popup, res);
+            popup.addEventListener('alert_confirm', dism);
+            popup.addEventListener('alert_deny', dism);
+            popup.addEventListener('backdrop_deny', dism);
             if (!popup) rej(new Error('popup undefined'));
         });
     }
