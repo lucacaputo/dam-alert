@@ -113,6 +113,7 @@
 }
 .__alert_button_primary {
     background-color: var(--alert-primary);
+    color: #fff;
 }
 .__alert_button_danger {
     background-color: var(--alert-danger);
